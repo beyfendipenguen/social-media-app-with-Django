@@ -1,22 +1,28 @@
 const post2 = $("#posts2")
-const spinnerBox = $("#spinner-box")
+const loadAnimation = $("#spinner-box");
 
-// TODO delete spinnerBox or add class "not-visible" to spinnerBox when all posts loaded
 $.ajax({
     type: "GET",
     url: "/posts-json/",
     data: "data",
     dataType: "json",
+    beforeSend: function () { loadAnimation.show(); },
+    
     success: function (response) {
         post2.append($("<p>").text("created from jquery"))
         const data = JSON.parse(response.data)
-        $.each(data, function (indexInArray, obj) { 
-            post2.append($("<p>")
-                .text(obj.fields.body)
-            )
-        });
+        console.log(data);
+        setTimeout(() => {
+            $.each(data, function (indexInArray, obj) {
+                post2.append($("<p>")
+                    .text(obj.fields.body)
+                )
+            });
+            loadAnimation.hide();
+        }, 1500);
+
     },
-    error: function (error){
+    error: function (error) {
         console.log(error)
     }
 });
