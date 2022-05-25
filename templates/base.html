@@ -19,8 +19,10 @@
 
     <!-- custom css & js-->
     <link rel="stylesheet" href={% static 'style.css' %}>
-    <script src={% static 'main.js' %} defer></script>
-
+    {% comment %} <script src={% static 'main.js' %} defer></script> {% endcomment %}
+    {% block scripts %}
+    
+    {% endblock scripts %}
     <title>Social project 2.0 | {% block title %}{% endblock title %}</title>
   </head>
   <body>
