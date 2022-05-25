@@ -54,6 +54,16 @@ class Profile(models.Model):
         return qs
     
     def get_proposals_for_following(self):
+        '''
+        1) get the profiles excluding our own
+        2) create the followers list for our profile
+        3) create and available list where:
+            - we loop through the profiles
+            - next we check if a particular profile is not on the followers
+            - only then we add that profile to the available list
+        4) we shuffle the available list
+        5) we return 3 first items of the available list
+        '''
         profiles = Profile.objects.all().exclude(user=self.user)
         followers_list = self.get_following_users()
         available = [p.user for p in profiles if p.user not in followers_list]
