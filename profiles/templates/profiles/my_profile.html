@@ -1,9 +1,33 @@
-{% extends "base.html"%}
-{% load static %}
-{% block scripts %}
+{% extends "base.html"%} {% load static %} {% block scripts %}
 <script src="{% static 'profiles/my_profile.js' %}" defer></script>
-{% endblock scripts %}
-{% block title %} My Profile{% endblock title %}
+{% endblock scripts %} {% block title %} My Profile{% endblock title %} 
 {% block content %}
-helloworld
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" id="to-follow-btn" data-toggle="modal" data-target="#toFollowModal">
+    people to follow
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="toFollowModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Check who you can follow</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="to-follow-modal-body">
+            <div class="text-center" id="spinner-box">
+                <div class="spinner-border" role="status">
+                  </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 {% endblock content %}
