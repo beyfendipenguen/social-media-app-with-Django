@@ -7,6 +7,6 @@ from .views import (
 app_name = 'profiles'
 
 urlpatterns = [
-    path('my-profile', MyProfileView.as_view(), name='my-profile-view').
-    path('my-profile-json', MyProfileData.as_view(), name='my-profile-json')
+    path('my-profiles', MyProfileView.as_view(), name='my-profile-view'),
+    path('my-profiles-json/', MyProfileData.as_view(), name='my-profile-view')
 ]
