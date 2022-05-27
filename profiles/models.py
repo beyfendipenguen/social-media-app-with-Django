@@ -55,6 +55,9 @@ class Profile(models.Model):
     
     def get_proposals_for_following(self):
         '''
+        first priority they follow you but you don't them
+        second priority your friends know them
+        third priority you are going to same school or work  (to compare the bio field)
         1) get the profiles excluding our own
         2) create the followers list for our profile
         3) create and available list where:
@@ -64,11 +67,8 @@ class Profile(models.Model):
         4) we shuffle the available list
         5) we return 3 first items of the available list
         '''
-        profiles = Profile.objects.all().exclude(user=self.user)
-        followers_list = self.get_following_users()
-        available = [p.user for p in profiles if p.user not in followers_list]
-        random.shuffle(available)
-        return available[:3]
+        canFollowList = Profile.objects.exclude(user=self.user).exclude(user__in=self.get_following().values("id")).order_by('?')
+        return canFollowList[:3]
 
     @property
     def following_count(self):

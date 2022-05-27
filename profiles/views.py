@@ -12,8 +12,7 @@ class MyProfileData(View):
         profile = Profile.objects.get(user=self.request.user)
         qs = profile.get_proposals_for_following()
         profiles_to_follow_list = []
-        for user in qs:
-            p = Profile.objects.get(user__username=user.username)
+        for p in qs:
             profile_item = {
                 'id': p.id,
                 'user': p.user.username,
